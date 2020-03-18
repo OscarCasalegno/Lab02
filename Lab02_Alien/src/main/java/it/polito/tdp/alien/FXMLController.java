@@ -41,22 +41,7 @@ public class FXMLController {
     @FXML
     void doTranslate(ActionEvent event) {
         String stringa = this.txtParola.getText().toLowerCase();
-    
-        for(char c :stringa.toCharArray()) {
-            if(Character.isDigit(c)) {
-                this.txtResult.appendText("RIMUOVERE I CARATTERI NUMERICI");
-                return;
-            }
-        }
-        
-        StringTokenizer st=new StringTokenizer(stringa);
-        
-        if(st.countTokens()==1) {
-           txtResult.appendText(model.traduzione(st.nextToken()));
-        }else {
-           model.traduzione(st.nextToken(), st.nextToken());
-        }
-        
+        txtResult.appendText(model.traduzione(stringa));
         txtParola.clear();
     }
 
