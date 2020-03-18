@@ -19,10 +19,11 @@ public class Model {
                     if (puntoDiDomanda) {
                         return "INSERISCI SOLO UN '?'\n";
                     }
-                    c = '.';
                     puntoDiDomanda = true;
+                }else {
+                    return "RIMUOVERE I CARATTERI NON ALFABETICI\n";
                 }
-                return "RIMUOVERE I CARATTERI NON ALFABETICI\n";
+                
             }
             
         }
@@ -43,11 +44,23 @@ public class Model {
             return "Parola Duplicata\n";
         }
 
-        if (this.dizionario.containsKey(aliena)) {
+        if (puntoDiDomanda) {
+            String str = "";
+            for (String s : this.dizionario.keySet()) {
+                if (s.length() == aliena.length() && 
+                        s.substring(0, aliena.indexOf('?'))
+                        .contentEquals(aliena.substring(0, aliena.indexOf('?'))) &&
+                        s.substring(aliena.indexOf('?')+1)
+                        .contentEquals(aliena.substring(aliena.indexOf('?')+1))) {
+                    str += s+": "+this.dizionario.get(s) + "\n";
+                }
+            } 
+            return str;
+        }else if (this.dizionario.containsKey(aliena)) {
             return this.dizionario.get(aliena) + "\n";
         }
 
-        return "Parola non presente";
+        return "Parola non presente\n";
 
     }
 
